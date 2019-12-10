@@ -6,15 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mp-mysql" />
         <module name="mp-oracle" />
-        <module name="mybatis-plus" />
+        <module name="mp-mysql" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="mp-mysql" target="1.8" />
-      <module name="mp-oracle" target="1.8" />
-      <module name="mybatis-plus" target="1.8" />
+      <module name="mp-mysql" target="12" />
+      <module name="mp-oracle" target="12" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mp-mysql" options="-parameters" />
+      <module name="mp-oracle" options="-parameters" />
+    </option>
   </component>
 </project>

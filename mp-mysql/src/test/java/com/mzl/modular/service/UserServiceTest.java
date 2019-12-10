@@ -1,6 +1,7 @@
 package com.mzl.modular.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.mzl.modular.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @ClassName UserServiceTest
@@ -176,5 +177,110 @@ public class UserServiceTest {
         list.add(user2);
         list.add(user1);
         userService.saveOrUpdateBatch(list, 2);
+    }
+
+    // 根据 entity 条件，删除记录
+    @Test
+    public void remove(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(User::getUserId, 10);
+        userService.remove(queryWrapper);
+    }
+
+    // 根据 ID 删除
+    @Test
+    public void removeById(){
+        userService.removeById(9);
+    }
+
+    // 根据 columnMap 条件，删除记录
+    @Test
+    public void removeByMap(){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("USER_ID", 8);
+        userService.removeByMap(map);
+    }
+
+    // 删除（根据ID 批量删除）
+    @Test
+    public void removeByIds(){
+        List<Integer> list = Arrays.asList(6, 7);
+        userService.removeByIds(list);
+    }
+
+    // 根据 UpdateWrapper 条件，更新记录 需要设置sqlset
+    @Test
+    public void update(){
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.set("create_time", LocalDateTime.now()).set("create_by", "may").eq("user_id", 5);
+        userService.update(updateWrapper);
+
+    }
+    // 根据 whereEntity 条件，更新记录
+    @Test
+    public void updateOfEntity(){
+        //修改值
+        User user = new User();
+        user.setCreateTime(LocalDateTime.now());
+        user.setCreateBy("may");
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("USER_ID", 1);
+        userService.update(user, updateWrapper);
+    }
+
+    // 根据 ID 选择修改
+    @Test
+    public void updateById(){
+        User user = new User();
+        user.setUserId(1);
+        user.setUpdateBy("may");
+        user.setUpdateTime(LocalDateTime.now());
+        userService.updateById(user);
+    }
+
+    // 根据ID 批量更新
+    @Test
+    public void updateBatchById(){
+        List<User> list = new ArrayList<>();
+
+        User user = new User();
+        user.setUserId(1);
+        user.setUpdateBy("lily");
+
+        User user1 = new User();
+        user1.setUserId(2);
+        user1.setUpdateBy("lily");
+        user1.setUpdateTime(LocalDateTime.now());
+
+        list.add(user);
+        list.add(user1);
+        userService.updateBatchById(list);
+    }
+
+    // 根据ID 批量更新
+    @Test
+    public void updateBatchByIdOfBatchSize(){
+        List<User> list = new ArrayList<>();
+
+        User user = new User();
+        user.setUserId(1);
+        user.setUpdateBy("lily");
+        user.setUpdateTime(null);
+
+        User user1 = new User();
+        user1.setUserId(2);
+        user1.setUpdateBy("lily");
+        user1.setUpdateTime(LocalDateTime.now());
+
+        User user2 = new User();
+        user2.setUserId(3);
+        user2.setUpdateBy("lily");
+        user2.setUpdateTime(LocalDateTime.now());
+
+        list.add(user);
+        list.add(user1);
+        list.add(user2);
+        userService.updateBatchById(list, 2);
+
     }
 }

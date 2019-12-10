@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/mp-mysql/mp-mysql.iml" filepath="$PROJECT_DIR$/mp-mysql/mp-mysql.iml" />
       <module fileurl="file://$PROJECT_DIR$/mp-oracle/mp-oracle.iml" filepath="$PROJECT_DIR$/mp-oracle/mp-oracle.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mybatis-plus.iml" filepath="$PROJECT_DIR$/mybatis-plus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mybatis-plus.iml" filepath="$PROJECT_DIR$/.idea/mybatis-plus.iml" />
     </modules>
   </component>
 </project>
