@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: bigger
+    password: bigger
+    url: jdbc:oracle:thin:@//10.200.7.89:1521/pdb01
+logging:
+  level:
+    com:
+      mzl:
+        mapper: debug
+  © 2019 GitHub, Inc.

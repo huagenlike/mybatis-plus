@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mp-mysql" />
+        <module name="mp-oracle" />
+        <module name="mybatis-plus" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mp-mysql" target="1.8" />
+      <module name="mp-oracle" target="1.8" />
+      <module name="mybatis-plus" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
