@@ -44,9 +44,12 @@ public class WrapperTest {
         //allEq1Demo2(map, false);
         //allEq1Demo3(true, map, false);
 
-        BiPredicate<String, Object> filter = (param1, param2) -> param1.equals(param2.toString());
-        System.out.println(filter.test("2", 2));
+        //SELECT user_id,user_name,user_age,user_sex,user_email,user_phone,create_time,create_by,update_time,update_by FROM t_user WHERE (user_sex = ?)
+        //key为数据库字段名,value为字段值，其中 "user_sex" 是和 map的key进行比较。
+        BiPredicate<String, Object> filter = (x, y) -> x .equals("user_sex");
         //allEq1DemoOne(filter, map);
+        //allEq1DemoTwo(filter, map, false);
+        allEq1DemoThree(true, filter, map, false);
     }
 
     /**
@@ -85,6 +88,11 @@ public class WrapperTest {
         list.forEach(System.out::println);
     }
 
+    /**
+     * allEq 过滤函数 方法一
+     * @param filter x是字段,y是对应的值,使用Lambda表达式进行条件的校验
+     * @param params key为数据库字段名,value为字段值
+     */
     public void allEq1DemoOne(BiPredicate<String, Object> filter, Map<String, Object> params){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.allEq(filter, params);
@@ -92,18 +100,30 @@ public class WrapperTest {
         list.forEach(System.out::println);
     }
 
+    /**
+     * allEq 过滤函数 方法二
+     * @param filter
+     * @param params
+     * @param null2IsNull
+     */
     public void allEq1DemoTwo(BiPredicate<String, Object> filter, Map<String, Object> params, boolean null2IsNull){
-
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.allEq(filter, params, null2IsNull);
+        List<User> list = userMapper.selectList(queryWrapper);
+        list.forEach(System.out::println);
     }
 
     /**
+     * allEq 过滤函数 方法三
      * @param condition
-     * @param filter 过滤函数,是否允许字段传入比对条件中
+     * @param filter
      * @param params
      * @param null2IsNull
      */
     public void allEq1DemoThree(boolean condition, BiPredicate<String, Object> filter, Map<String, Object> params, boolean null2IsNull){
-
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.allEq(condition, filter, params, null2IsNull);
+        List<User> list = userMapper.selectList(queryWrapper);
+        list.forEach(System.out::println);
     }
-
 }
