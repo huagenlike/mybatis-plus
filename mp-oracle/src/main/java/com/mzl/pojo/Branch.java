@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @TableName("BIG_BRANCH")
-@KeySequence(value = "BRANCH_ID_SEQ")
+@KeySequence(value = "BRANCH_ID_SEQ", clazz = Long.class)
 public class Branch {
 
     @TableId(value = "BRANCH_ID", type = IdType.INPUT)

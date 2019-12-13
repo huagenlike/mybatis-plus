@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @ClassName MybatisPlusConfig
- * @Description: TODO
+ * @Description:
  * @Author may
  * @Date 2019/12/11 11:13
  */
@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.mzl.modular.mapper*")
 public class MybatisPlusConfig {
 
+    //Spring boot方式，配置mybatis-plus分页插件
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();

@@ -2,6 +2,7 @@ package com.mzl.modular.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.mzl.core.common.enums.SexEnum;
 import com.mzl.modular.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +52,7 @@ public class UserServiceTest {
         User user2 = new User();
         user2.setUserName("唐萍");
         user2.setUserAge(32);
-        user2.setUserSex("1");
+        user2.setUserSex(SexEnum.MALE);
         user2.setUserEmail("tangping@163.com");
         user2.setUserPhone("13610259968");
 
@@ -137,7 +138,7 @@ public class UserServiceTest {
 
         User user1 = new User();
         user1.setUserId(8);
-        user1.setUserSex("1");
+        user1.setUserSex(SexEnum.FEMALE);
 
         User user2 = new User();
         user2.setUserName("李霞");
@@ -169,7 +170,7 @@ public class UserServiceTest {
         User user2 = new User();
         user2.setUserName("江珊");
         user2.setUserAge(24);
-        user2.setUserSex("1");
+        user2.setUserSex(SexEnum.FEMALE);
         user2.setUserPhone("15011425698");
         user2.setUserEmail("jiangshan@163.com");
 

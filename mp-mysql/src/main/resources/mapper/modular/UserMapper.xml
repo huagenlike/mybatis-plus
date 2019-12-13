@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mzl.modular.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.mzl.modular.entity.User">
+        <id property="userId" column="user_id"></id>
+        <result property="userName" column="user_name"></result>
+        <result property="userAge" column="user_age"></result>
+        <result property="userSex" column="user_sex"></result>
+        <result property="userPhone" column="user_phone"></result>
+        <result property="userEmail" column="user_email"></result>
+        <result property="createTime" column="user_time"></result>
+        <result property="createBy" column="user_by"></result>
+        <result property="updateTime" column="user_time"></result>
+        <result property="updateBy" column="user_by"></result>
+    </resultMap>
 
+    <!--方案二 XML形式 Mapper.xml-->
+    <select id="getAll" resultMap="BaseResultMap">
+	  SELECT * FROM t_user ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectPageVo" resultType="com.mzl.modular.entity.User">
+    SELECT user_id,user_name FROM t_user WHERE user_sex=#{userSex}
+</select>
 </mapper>
