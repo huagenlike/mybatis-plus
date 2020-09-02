@@ -66,9 +66,9 @@ public class Branch {
 
     /**
      * 非数据库字段：
-     *  1、@TableField(exist = false)
-     *  2、private static String remark;
-     *  3、private transient String remark;
+     * 1、@TableField(exist = false)
+     * 2、private static String remark;
+     * 3、private transient String remark;
      */
     @TableField(exist = false)
     private String remark;

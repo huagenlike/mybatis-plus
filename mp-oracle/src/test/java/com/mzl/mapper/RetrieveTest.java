@@ -1,5 +1,6 @@
 package com.mzl.mapper;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -51,17 +52,20 @@ public class RetrieveTest {
 
     /**
      * 根据 ID 查询
+     *
      * @param id 主键ID
      * @return 实体
      */
+    @DS("bigger")
     @Test
     public void selectById() {
-        Branch branch = branchMapper.selectById(10000);
+        Branch branch = branchMapper.selectById(10160);
         System.out.println(branch);
     }
 
     /**
      * 查询（根据ID 批量查询）
+     *
      * @param idList 主键ID列表(不能为 null 以及 empty)
      * @return 实体集合
      */
@@ -74,6 +78,7 @@ public class RetrieveTest {
 
     /**
      * 查询（根据 columnMap 条件）
+     *
      * @param columnMap 表字段 map 对象
      * @return 实体集合
      */
@@ -89,6 +94,7 @@ public class RetrieveTest {
 
     /**
      * 根据 entity 条件，查询一条记录
+     *
      * @param queryWrapper 实体对象
      * @return 实体
      * 如果逻辑非唯一该方法不会自动替您 limit 1 你需要 wrapper.last("limit 1") 设置唯一性。
@@ -103,11 +109,12 @@ public class RetrieveTest {
 
     /**
      * 根据 Wrapper 条件，查询总记录数
+     *
      * @param queryWrapper 实体对象
      * @return 满足条件记录数
      */
     @Test
-    public void selectCount(){
+    public void selectCount() {
         QueryWrapper<Branch> queryWrapper = new QueryWrapper<Branch>();
         queryWrapper.eq("DELETE_MARK", 1);
         Integer count = branchMapper.selectCount(queryWrapper);
@@ -116,6 +123,7 @@ public class RetrieveTest {
 
     /**
      * 根据 entity 条件，查询全部记录
+     *
      * @param queryWrapper 实体对象封装操作类（可以为 null）
      * @return 实体集合
      */
@@ -130,11 +138,12 @@ public class RetrieveTest {
 
     /**
      * 根据 Wrapper 条件，查询全部记录
+     *
      * @param queryWrapper 实体对象封装操作类（可以为 null）
      * @return 字段映射对象 Map 集合
      */
     @Test
-    public void selectMaps(){
+    public void selectMaps() {
         QueryWrapper<Branch> queryWrapper = new QueryWrapper<Branch>();
         queryWrapper.eq("DELETE_MARK", 1);
         List<Map<String, Object>> maps = branchMapper.selectMaps(queryWrapper);
@@ -144,11 +153,12 @@ public class RetrieveTest {
     /**
      * 根据 Wrapper 条件，查询全部记录
      * 注意： 只返回第一个字段的值
+     *
      * @param queryWrapper 实体对象封装操作类（可以为 null）
      * @return 字段映射对象集合
      */
     @Test
-    public void selectObjs(){
+    public void selectObjs() {
         QueryWrapper<Branch> queryWrapper = new QueryWrapper<Branch>();
         queryWrapper.eq("DELETE_MARK", 1);
         List<Object> objects = branchMapper.selectObjs(queryWrapper);
@@ -157,12 +167,13 @@ public class RetrieveTest {
 
     /**
      * 根据 entity 条件，查询全部记录（并翻页）
+     *
      * @param page         分页查询条件（可以为 RowBounds.DEFAULT）
      * @param queryWrapper 实体对象封装操作类（可以为 null）
      * @return 实体分页对象
      */
     @Test
-    public void selectPage(){
+    public void selectPage() {
         Page<Branch> page = new Page<>();
         page.setPages(1);
         page.setSize(5);
@@ -176,12 +187,13 @@ public class RetrieveTest {
 
     /**
      * 根据 Wrapper 条件，查询全部记录（并翻页）
+     *
      * @param page         分页查询条件
      * @param queryWrapper 实体对象封装操作类
      * @return 字段映射对象 Map 分页对象
      */
     @Test
-    public void selectMapsPage(){
+    public void selectMapsPage() {
         Page<Branch> page = new Page<>();
         page.setPages(1);
         page.setSize(5);
@@ -237,7 +249,7 @@ public class RetrieveTest {
     public void selectByWrapper5() {
         QueryWrapper<Branch> queryWrapper = new QueryWrapper<Branch>();
         //QueryWrapper<Branch> query = Wrappers.<Branch>query();
-        queryWrapper.likeRight("BRANCH_NAME", "本源").and(qw -> qw.lt("BRANCH_ID",20000).or().isNotNull("BRANCH_CONTACTS_MOBILE"));
+        queryWrapper.likeRight("BRANCH_NAME", "本源").and(qw -> qw.lt("BRANCH_ID", 20000).or().isNotNull("BRANCH_CONTACTS_MOBILE"));
         List<Branch> branchList = branchMapper.selectList(queryWrapper);
         branchList.forEach(System.out::println);
     }
@@ -306,8 +318,8 @@ public class RetrieveTest {
     /**
      * 查不包含"BRANCH_ID", "BRANCH_NAME" 的字段
      * SELECT BRANCH_ID,branch_contacts,branch_introduction,city,department_code,branch_address,org_code,relevance_org_code,branch_contacts_email,rental_tax_rate,branch_bank,bank_account,last_updated_by,foreground_show,branch_name,property_tax_rate,split_ratio,service_tax_rate,branch_code,branch_company,delete_mark,last_updated_date,branch_contacts_mobile,created_date,created_by,branch_relationname FROM BIG_BRANCH WHERE (BRANCH_ID IN (?,?,?,?))
-     *
-     *  --需要注意打印的sql，字段是大写还是小写，否则不会隐藏
+     * <p>
+     * --需要注意打印的sql，字段是大写还是小写，否则不会隐藏
      * SELECT BRANCH_ID,branch_contacts,branch_introduction,city,department_code,branch_address,org_code,relevance_org_code,branch_contacts_email,rental_tax_rate,branch_bank,bank_account,last_updated_by,foreground_show,branch_name,branch_code,created_by,branch_relationname FROM BIG_BRANCH WHERE (BRANCH_ID IN (?,?,?,?))
      */
     @Test
@@ -316,13 +328,13 @@ public class RetrieveTest {
 
         wrapper.select(Branch.class, info ->
                 !info.getColumn().equals("property_tax_rate") &&
-                !info.getColumn().equals("split_ratio") &&
-                !info.getColumn().equals("service_tax_rate") &&
-                !info.getColumn().equals("branch_company") &&
-                !info.getColumn().equals("delete_mark") &&
-                !info.getColumn().equals("last_updated_date") &&
-                !info.getColumn().equals("branch_contacts_mobile") &&
-                !info.getColumn().equals("created_date")).in("BRANCH_ID", Arrays.asList(10221, 10222, 10180, 10000));
+                        !info.getColumn().equals("split_ratio") &&
+                        !info.getColumn().equals("service_tax_rate") &&
+                        !info.getColumn().equals("branch_company") &&
+                        !info.getColumn().equals("delete_mark") &&
+                        !info.getColumn().equals("last_updated_date") &&
+                        !info.getColumn().equals("branch_contacts_mobile") &&
+                        !info.getColumn().equals("created_date")).in("BRANCH_ID", Arrays.asList(10221, 10222, 10180, 10000));
         List<Branch> branchList = branchMapper.selectList(wrapper);
         branchList.forEach(System.out::println);
     }

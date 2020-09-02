@@ -29,6 +29,7 @@ public class BranchMapperTest {
 
     /**
      * 插入一条记录
+     *
      * @param entity 实体对象
      * @return 插入成功记录数
      */
@@ -42,16 +43,18 @@ public class BranchMapperTest {
 
     /**
      * 根据 ID 删除
+     *
      * @param id 主键ID
      * @return 删除成功记录数
      */
     @Test
-    public void  deleteById(){
+    public void deleteById() {
         int i = branchMapper.deleteById(10045L);
     }
 
     /**
      * 根据 columnMap 条件，删除记录
+     *
      * @param columnMap 表字段 map 对象
      * @return 删除成功记录数
      */
@@ -65,11 +68,12 @@ public class BranchMapperTest {
 
     /**
      * 根据 entity 条件，删除记录
+     *
      * @param wrapper 实体对象封装操作类（可以为 null）
      * @return 删除成功记录数
      */
     @Test
-    public void delete(){
+    public void delete() {
         QueryWrapper<Branch> wrapper = Wrappers.query();
         wrapper.eq("BRANCH_ID", 10047);
         branchMapper.delete(wrapper);
@@ -77,17 +81,19 @@ public class BranchMapperTest {
 
     /**
      * 删除（根据ID 批量删除）
+     *
      * @param idList 主键ID列表(不能为 null 以及 empty)
      * @return 删除成功记录数
      */
     @Test
-    public void deleteBatchIds(){
+    public void deleteBatchIds() {
         List<Integer> idList = Arrays.asList(10048, 10049);
         int i = branchMapper.deleteBatchIds(idList);
     }
 
     /**
      * 根据 ID 修改
+     *
      * @param entity 实体对象
      * @return 修改成功记录数
      */
@@ -101,6 +107,7 @@ public class BranchMapperTest {
 
     /**
      * 根据 whereEntity 条件，更新记录
+     *
      * @param entity        实体对象 (set 条件值,可为 null)
      * @param updateWrapper 实体对象封装操作类（可以为 null,里面的 entity 用于生成 where 语句）
      * @return 修改成功记录数

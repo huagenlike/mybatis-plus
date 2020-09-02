@@ -28,7 +28,7 @@ public class MybatisPlusConfig {
      * 序列生成器
      */
     @Bean
-    public OracleKeyGenerator oracleKeyGenerator(){
+    public OracleKeyGenerator oracleKeyGenerator() {
         return new OracleKeyGenerator();
     }
 }
